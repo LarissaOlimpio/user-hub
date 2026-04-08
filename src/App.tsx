@@ -1,12 +1,17 @@
-import Header from "./components/Header/Header";
+import { Header } from "./components/Header/Header";
+import { Box } from "@mui/material";
+import { UserList } from "./components/UserList/UserList";
 import "./App.css";
-
-function App() {
+const App = () => {
   return (
-    <>
+    <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
       <Header />
-    </>
+      <main>
+        {/* O UserList contém o SearchBar, a Grid de cards e o Modal */}
+        <UserList />
+      </main>
+    </Box>
   );
-}
+};
 
 export default App;

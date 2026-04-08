@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Container } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
 
-export default function Header() {
+export const Header = () => {
   return (
     <AppBar position="static" color="inherit" elevation={1} sx={{ mb: 4 }}>
       <Container maxWidth="lg">
@@ -26,4 +26,4 @@ export default function Header() {
       </Container>
     </AppBar>
   );
-}
+};
