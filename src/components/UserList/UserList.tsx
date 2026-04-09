@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Container, Alert, Box, Pagination } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -15,7 +15,9 @@ import type { User } from "../../types/User";
 
 export const UserList = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [urlUserId, setUrlUserId] = useState<string | null>(
+    new URLSearchParams(window.location.search).get("user"),
+  );
 
   const {
     data: users,
@@ -25,23 +27,36 @@ export const UserList = () => {
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
+
   const { searchTerm, setSearchTerm, filteredData } = useSearch(
     users || [],
     "name",
   );
+
   const { page, setPage, totalPages, paginatedData } = usePagination(
     filteredData,
     6,
   );
 
+  const activeUser = useMemo(() => {
+    if (selectedUser) return selectedUser;
+    if (urlUserId && users) {
+      return users.find((u) => u.id === Number(urlUserId)) || null;
+    }
+    return null;
+  }, [selectedUser, urlUserId, users]);
+
   const handleOpenDetails = (user: User) => {
     setSelectedUser(user);
-    setIsModalOpen(true);
+    setUrlUserId(String(user.id));
+    const newUrl = `${window.location.pathname}?user=${user.id}`;
+    window.history.pushState({}, "", newUrl);
   };
 
   const handleCloseDetails = () => {
-    setIsModalOpen(false);
     setSelectedUser(null);
+    setUrlUserId(null);
+    window.history.pushState({}, "", window.location.pathname);
   };
 
   const handleSearchChange = (value: string) => {
@@ -88,8 +103,8 @@ export const UserList = () => {
       )}
 
       <UserDetailsModal
-        user={selectedUser}
-        open={isModalOpen}
+        open={!!activeUser}
+        user={activeUser}
         onClose={handleCloseDetails}
       />
     </Container>
