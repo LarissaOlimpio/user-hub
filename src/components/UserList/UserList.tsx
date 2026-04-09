@@ -61,7 +61,11 @@ export const UserList = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <SearchBar value={searchTerm} onChange={handleSearchChange} />
+      <SearchBar
+        value={searchTerm}
+        placeholder="Buscar usuários pelo nome..."
+        onChange={handleSearchChange}
+      />
 
       <Grid container spacing={3}>
         {paginatedData.map((user) => (
