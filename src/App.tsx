@@ -7,7 +7,6 @@ const App = () => {
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
       <Header />
       <main>
-        {/* O UserList contém o SearchBar, a Grid de cards e o Modal */}
         <UserList />
       </main>
     </Box>
