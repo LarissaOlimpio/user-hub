@@ -20,6 +20,8 @@ This project was built using the most modern development standards:
 * **UX Optimized with Skeletons**: 
     * **Skeleton Screens**: Replacing traditional spinners with "skeleton" layouts that reduce perceived loading time and prevent Layout Shift.
 * **User Details Modal**: Detailed display of additional information (company, address, contact) through an accessible modal interface.
+  * The modal remains open after a page refresh, maintaining the user's context.
+  * Specific profiles can be shared directly via link.
 * **Clean Code Architecture**: Separation of concerns using a **Service Layer** for API calls and **Custom Hooks** for search and pagination logic.
 
 ## 🧪 Unit Testing
