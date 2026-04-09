@@ -7,6 +7,7 @@ import { fetchUsers } from "../../service/api";
 import { UserCard } from "../UserCard/UserCard";
 import { UserDetailsModal } from "../UserDetailsModal/UserDetailsModal";
 import { SearchBar } from "../SearchBar/SearchBar";
+import { CardGridSkeleton } from "../CardGridSkeleton/CardGridSkeleton";
 
 import { useSearch } from "../../hooks/useSearch";
 import { usePagination } from "../../hooks/usePagination";
@@ -47,8 +48,8 @@ export const UserList = () => {
     setSearchTerm(value);
     setPage(1);
   };
-  if (isLoading)
-    return <Container sx={{ py: 4 }}>Carregando usuários...</Container>;
+
+  if (isLoading) return <CardGridSkeleton quantity={6} showSearch={true} />;
 
   if (isError) {
     return (
@@ -62,7 +63,6 @@ export const UserList = () => {
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <SearchBar value={searchTerm} onChange={handleSearchChange} />
 
-      {/* Grid de Usuários usando o resultado paginado */}
       <Grid container spacing={3}>
         {paginatedData.map((user) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={user.id}>
