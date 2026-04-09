@@ -1,17 +1,30 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { SearchBar } from "./../components/SearchBar/SearchBar";
+import { renderHook, act } from "@testing-library/react";
+import { useSearch } from "./useSearch";
+import { describe, it, expect, vi } from "vitest";
 
-describe("SearchBar Component", () => {
-  it("The onChange function should be called with the correct value when typing.", () => {
-    const handleChange = vi.fn();
+const mockData = [
+  { id: 1, name: "Larissa" },
+  { id: 2, name: "João" },
+];
 
-    render(<SearchBar value="" onChange={handleChange} />);
+describe("useSearch Hook", () => {
+  it("should filter the data only after the debounce time.", () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useSearch(mockData, "name"));
 
-    const input = screen.getByRole("textbox");
+    act(() => {
+      result.current.setSearchTerm("Lari");
+    });
 
-    fireEvent.change(input, { target: { value: "Larissa" } });
+    expect(result.current.filteredData).toHaveLength(2);
 
-    expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith("Larissa");
+    act(() => {
+      vi.advanceTimersByTime(300);
+    });
+
+    expect(result.current.filteredData).toHaveLength(1);
+    expect(result.current.filteredData[0].name).toBe("Larissa");
+
+    vi.useRealTimers();
   });
 });
