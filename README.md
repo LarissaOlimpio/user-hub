@@ -16,7 +16,7 @@ This project was built using the most modern development standards:
 
 * **User Visualization**: Dynamic listing consuming the JSONPlaceholder public API.
 * **Search and Filtering**: Real-time filtering by username with logic decoupled into custom hooks.
-* **Smart Pagination**: Fluid navigation by dividing large datasets into smaller, manageable pages.
+  * **Custom `useDebounce` Hook**: Implemented to limit the frequency of filtering operations, improving performance by waiting 300ms after the user stops typing before triggering a re-render.
 * **UX Optimized with Skeletons**: 
     * **Skeleton Screens**: Replacing traditional spinners with "skeleton" layouts that reduce perceived loading time and prevent Layout Shift.
 * **User Details Modal**: Detailed display of additional information (company, address, contact) through an accessible modal interface.
@@ -38,7 +38,7 @@ The project uses **Vitest** to ensure code quality through unit and integration 
     npm run test:ui
     ```
 
-* **Coverage**: Tests cover hook logic (`useSearch`, `usePagination`) and the integrity of critical components (`SearchBar`, `UserCard`, `UserDetailsModal`).
+* **Coverage**: Tests cover hook logic (`useSearch`, `usePagination` and `useDebounce`) and the integrity of critical components (`SearchBar`, `UserCard`, `UserDetailsModal`).
 
 ## 🚀 Getting Started
 
