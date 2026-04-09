@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# 👥 UserHub - User Management Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern interface for viewing and managing users was developed as a technical challenge.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project was built using the most modern development standards:
 
-## React Compiler
+* **React 18** with **TypeScript**: Ensuring type safety and a component-based UI.
+* **Material UI (MUI) v6**: Professional component library for a responsive and accessible design.
+* **TanStack Query (React Query) v5**: Powerful asynchronous state management for data fetching, caching, and synchronization.
+* **Vitest & React Testing Library**: High-performance testing framework focused on testing application behavior from the user's perspective.
+* **Vite**: Next-generation build tool for a fast development workflow.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
 
-## Expanding the ESLint configuration
+* **User Visualization**: Dynamic listing consuming the JSONPlaceholder public API.
+* **Search and Filtering**: Real-time filtering by username with logic decoupled into custom hooks.
+* **Smart Pagination**: Fluid navigation by dividing large datasets into smaller, manageable pages.
+* **UX Optimized with Skeletons**: 
+    * **Skeleton Screens**: Replacing traditional spinners with "skeleton" layouts that reduce perceived loading time and prevent Layout Shift.
+* **User Details Modal**: Detailed display of additional information (company, address, contact) through an accessible modal interface.
+* **Clean Code Architecture**: Separation of concerns using a **Service Layer** for API calls and **Custom Hooks** for search and pagination logic.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧪 Unit Testing
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The project uses **Vitest** to ensure code quality through unit and integration tests.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1.  **Run tests in the terminal (Watch Mode):**
+    ```bash
+    npm run test
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2.  **Run tests with Visual Interface (Vitest UI):**
+    ```bash
+    npm run test:ui
+    ```
+
+* **Coverage**: Tests cover hook logic (`useSearch`, `usePagination`) and the integrity of critical components (`SearchBar`, `UserCard`, `UserDetailsModal`).
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/LarissaOlimpio/user-hub.git
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open in your browser:**
+    Navigate to `http://localhost:5173`
+
+## 🏗️ Project Structure
+
+```text
+src/
+ ├── components/      # UI Components (Cards, Modals, Skeletons)
+ ├── hooks/           # Business logic and custom hooks (includes .test.ts files)
+ ├── services/        # API Layer (api.ts) for centralized fetch logic
+ ├── teste/           # Global configuration and test environment setup
+ ├── types/           # TypeScript interfaces and API definitions
+ └── utils/           # Utility functions and constants
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+ Developed with ❤️ by Larissa Olimpio
